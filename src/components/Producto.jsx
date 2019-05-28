@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { eliminarProducto } from "../actions/productosActions";
+import { editarProducto } from "../actions/productosActions";
 
 class Producto extends Component {
 
@@ -13,7 +14,7 @@ class Producto extends Component {
     return (
       <li>
         <p>{producto.nombre}</p>
-        <button onClick={this.guardarCambios} className="btn btn-info">
+        <button onClick={()=>this.props.onClickEditar(producto)} className="btn btn-info">
             Editar
         </button>
         <button onClick={this.eliminarP} className="btn btn-danger">
@@ -26,5 +27,5 @@ class Producto extends Component {
 
 export default connect(
   null,
-  { eliminarProducto }
+  { eliminarProducto, editarProducto }
 ) (Producto);

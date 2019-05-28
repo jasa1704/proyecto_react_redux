@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { mostrarProductos } from "../actions/productosActions";
+import { mostrarProductos, actualizarProducto } from "../actions/productosActions";
 import Producto from "./Producto";
 
 class Productos extends Component {
+  
   componentDidMount() {
     this.props.mostrarProductos();
   }
 
   nuevoP = () => {
     this.props.history.push('/productos/nuevo');
+  };
+
+  editarCambios = (producto) => {
+    this.props.actualizarProducto(producto);
+    this.props.history.push("/productos/editar");
   };
 
   render() {
@@ -21,7 +27,7 @@ class Productos extends Component {
             Nuevo producto
         </button>
         {productos.map((producto, index) => {
-          return <Producto key={index} producto={producto} />;
+          return <Producto key={index} producto={producto} onClickEditar = {this.editarCambios} />;
         })}
       </div>
     );
@@ -36,5 +42,5 @@ const mapStateToProp = state => {
 
 export default connect(
   mapStateToProp,
-  { mostrarProductos }
+  { mostrarProductos, actualizarProducto}
 )(Productos);

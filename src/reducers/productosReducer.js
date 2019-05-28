@@ -1,7 +1,8 @@
-import { MOSTRAR_PRODUCTOS, GUARDAR_PRODUCTO, ELIMINAR_PRODUCTO, EDITAR_PRODUCTO } from "../actions/types";
+import { MOSTRAR_PRODUCTOS, GUARDAR_PRODUCTO, ELIMINAR_PRODUCTO, EDITAR_PRODUCTO, ACTUALIZAR_PRODUCTO } from "../actions/types";
 
 const estadoInicial = {
-  productos: []
+  productos: [],
+  editarProducto: []
 };
 export default function(state = estadoInicial, action) {
   switch (action.type) {
@@ -18,12 +19,16 @@ export default function(state = estadoInicial, action) {
         }
       })};
       break;
+    case ACTUALIZAR_PRODUCTO:
+        return { ...state, editarProducto: action.payload };
+        break;
     case EDITAR_PRODUCTO:
-      debugger
-          return { ...state, productos: state.productos.filter((item)=>{
-            if(item.id != action.payload){
+          return { ...state, productos: state.productos.map((item)=>{
+
+              if (item.id === action.payload.id) {
+                  item = action.payload; 
+                }
               return item;
-            }
           })};
       break;    
     default:

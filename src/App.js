@@ -1,11 +1,12 @@
 import React from "react";
-
 import { Provider } from "react-redux";
 import store from "./store";
 import Productos from "./components/Productos";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NoRuta from "./components/NoRuta";
 import NuevoProducto from "./components/NuevoProducto";
+import EditarProducto from "./components/EditarProducto";
+
 class App extends React.Component {
   render() {
     return (
@@ -16,6 +17,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Productos} />
             <Route exact path="/productos/nuevo" component={NuevoProducto} />
+            <Route exact path="/productos/editar" component={EditarProducto} />
             <Route component={NoRuta} />
           </Switch>
         </BrowserRouter>

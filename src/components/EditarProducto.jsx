@@ -1,36 +1,43 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { guardarProducto } from "../actions/productosActions";
-class NuevoProducto extends Component {
-  state = { nombre: "", precio: 0 };
+import { editarProducto } from "../actions/productosActions";
+
+class EditarProducto extends Component {
+
+  state = { id: 0, nombre: "", precio: 0 };
+
+  componentDidMount(){
+    this.setState({ id: 0, nombre: this.props.producto.nombre, precio: this.props.producto.precio });
+  }
 
   changeInput = e => {
     console.log(e.target.value);
 
     this.setState({ [e.target.name]: e.target.value });
   };
-  guardarCambios = () => {
+
+  editarCambios = () => {
     //Guardar el producto
-    console.log("guardando el producto");
-    this.props.guardarProducto(this.state);
+    console.log("editar el producto");
+    this.props.editarProducto(this.state);
     this.props.history.push("/");
   };
 
   render() {
     return (
       <div className="container">
-        <h2>Agregar Producto</h2>
+        <h2>Editar Producto</h2>
         <div>
           <label htmlFor="">Nombre</label>
-          <input onChange={this.changeInput} name="nombre" type="text" />
+          <input onChange={this.changeInput} name="nombre" type="text" value={this.state.nombre} />
         </div>
         <div>
           <label htmlFor="">Precio</label>
-          <input onChange={this.changeInput} name="precio" type="text" />
+          <input onChange={this.changeInput} name="precio" type="text" value={this.state.precio} />
         </div>
         <div>
-          <button onClick={this.guardarCambios} className="btn btn-success">
-            🔒Guardar
+          <button onClick={this.editarCambios} className="btn btn-success">
+            Actualizar
           </button>
         </div>
       </div>
@@ -38,7 +45,13 @@ class NuevoProducto extends Component {
   }
 }
 
+const mapStateToProp = state => {
+  return {
+    producto: state.productos.editarProducto
+  };
+};
+
 export default connect(
-  null,
-  { guardarProducto }
-)(NuevoProducto);
+  mapStateToProp,
+  { editarProducto }
+)(EditarProducto);
