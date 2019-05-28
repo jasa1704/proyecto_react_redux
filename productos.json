@@ -1,0 +1,24 @@
+{
+  "productos": [
+    {
+      "nombre": "pan",
+      "precio": "200",
+      "id": 1
+    },
+    {
+      "nombre": "huevos",
+      "precio": "400",
+      "id": 1
+    },
+    {
+      "nombre": "arros",
+      "precio": "1500",
+      "id": 1
+    },
+    {
+      "nombre": "manzana",
+      "precio": "1000",
+      "id": 1
+    }
+  ]
+}
